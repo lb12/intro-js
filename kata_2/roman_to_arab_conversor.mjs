@@ -1,7 +1,7 @@
 import { dictionary } from './utils';
 
 let input = [];
-let output = "";
+let output = 0;
 
 
 function convert(romanNumber) {    
