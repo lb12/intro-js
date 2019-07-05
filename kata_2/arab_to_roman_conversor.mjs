@@ -1,3 +1,5 @@
+'use strict';
+
 import { arabToRoman as dictionary, isArabNumber } from './utils';
 
 
