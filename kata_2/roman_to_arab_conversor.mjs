@@ -1,8 +1,7 @@
-let utils = require('./utils');
+import { dictionary } from './utils';
 
 let input = [];
 let output = "";
-
 
 
 function convert(romanNumber) {    
@@ -28,8 +27,8 @@ function conversionProcess(){
     let auxOutput = [];
 
     for ( let i = 0; i < input.length; i++ ) {
-        let actualValue = utils.getDictionary()[ input[i] ] ;
-        let nextValue = utils.getDictionary()[ input[i + 1] ] ;
+        let actualValue = dictionary[ input[i] ] ;
+        let nextValue = dictionary[ input[i + 1] ] ;
         
         if(nextValue === undefined) { // Exit condition
             auxOutput[i] = actualValue;
@@ -53,7 +52,4 @@ function printResult(romanNumber) {
 }
 
 
-
-module.exports = {
-    convert
-}
+export { convert }
