@@ -1,10 +1,10 @@
-import { dictionary } from './utils';
+import { romanToArab as dictionary, isRomanNumber } from './utils';
 
 let input = [];
 let output = 0;
 
 
-function convert(romanNumber) {    
+function convert(romanNumber) {
     // TODO: Check good roman number with function
     // Function call goes here
 

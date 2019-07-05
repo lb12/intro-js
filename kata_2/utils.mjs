@@ -1,6 +1,6 @@
 'use strict';
 
-let dictionary = {
+let romanToArab = {
     I  : 1,
     IV : 4,
     V  : 5,
@@ -16,5 +16,73 @@ let dictionary = {
     M  : 1000
 };
 
+let arabToRoman = {
+    0 : {
+        roman: 'I',
+        arab:  1
+    },
+    1 : {
+        roman: 'IV',
+        arab:  4
+    },
+    2 : {
+        roman: 'V',
+        arab:  5
+    },
+    3 : {
+        roman: 'IX',
+        arab:  9
+    },
+    4 : {
+        roman: 'X',
+        arab:  10
+    },
+    5 : {
+        roman: 'XL',
+        arab:  40
+    },
+    6 : {
+        roman: 'L',
+        arab:  50
+    },
+    7 : {
+        roman: 'XC',
+        arab:  90
+    },
+    8 : {
+        roman: 'C',
+        arab:  100
+    },
+    9 : {
+        roman: 'CD',
+        arab:  400
+    },
+    10 : {
+        roman: 'D',
+        arab:  500
+    },
+    11 : {
+        roman: 'CM',
+        arab:  900
+    },
+    12 : {
+        roman: 'M',
+        arab:  1000
+    },
+};
 
-export { dictionary };
+// TODO
+function isRomanNumber( number ) {
+    return true;
+}
+
+function isArabNumber( number ) {
+    return Number.isInteger(number);
+}
+
+export { 
+    romanToArab, 
+    arabToRoman,
+    isRomanNumber,
+    isArabNumber    
+};
