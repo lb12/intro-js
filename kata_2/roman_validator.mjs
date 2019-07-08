@@ -23,20 +23,21 @@ let badNumbers = [
     'IC'
 ];
 
+goodNumbers.forEach(element => {
+    console.log(element + ' ? ' + validate(element));
+});
+
 badNumbers.forEach(element => {
     console.log(element + ' ? ' + validate(element));
 });
 
 
 function validate( romanNumber ) {
-    if ( !isValidOrderRule(romanNumber) ||
+    if ( // !isValidOrderRule(romanNumber) || // TODO: Check this (seems bad)
          !isValid1stRule(romanNumber)   || 
          !isValid2ndRule(romanNumber)   ||
          !isValid4thRule(romanNumber)) 
         return false;
-    
-    if(!isValidOrderRule(romanNumber)) return false;
-
 
     return true;
 }
