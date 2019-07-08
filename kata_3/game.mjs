@@ -23,6 +23,7 @@ function playGame() {
 
     checkColor(hand1);
     checkPoker(hand1);
+    getHigherCardValue(hand1);
 }
 
 
@@ -43,9 +44,9 @@ function init() {
     //     new Card( 'A', 'H' )
     // ]);
     let cardSet1 = new Set([
-        new Card( '6', 'H' ),
-        new Card( '6', 'S' ),
-        new Card( '6', 'H' ),
+        new Card( '1', 'H' ),
+        new Card( '8', 'S' ),
+        new Card( '3', 'H' ),
         new Card( '6', 'C' ),
         new Card( '5', 'D' )
     ].sort(lowestToHighest));
@@ -95,4 +96,12 @@ function checkPoker( hand ) {
     console.log('Poker? ' + isPoker);
 
     return isPoker;
+}
+
+
+
+function getHigherCardValue( hand ) {
+    let cardValue = Array.from(hand.cardList)[4].value;
+    console.log( `Higher card is: ${cardValue}` );
+    return cardValue;
 }
