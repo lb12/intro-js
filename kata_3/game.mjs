@@ -1,54 +1,48 @@
 'use strict'
 
 import { Card } from "./card";
-import { Hand } from "./hand";
-import { lowestToHighest } from "./utils";
+import { lowestToHighest, valuesDictionary,  } from "./utils";
 
 
-let hand1; 
-let hand2;
-
-playGame();
+let hand1 = []; 
+let hand2 = [];
 
 
+function playGame(hand1String, hand2String) { // hand1String='1H,1C,1D,1S,4H' ; hand2String='6C,9D,7H,3S,9H'
+    init(hand1String, hand2String);
 
-function playGame() {
-    init();
-    console.log('\nPlayer 1:');
-    hand1.printHand();
-    // console.log('\nPlayer 2:');
-    // hand2.printHand();
+    console.log('\nPlayer 1 Hand checker...\n');
+    checkHandRules(hand1);
+    console.log('\nPlayer 2 Hand checker...\n');
+    checkHandRules(hand2);
+}
 
-    // Check
-
-    hand1 = Array.from(hand1.cardList);
-
-    console.log(`checkStraightFlush? ${checkStraightFlush(hand1)}`);
-    console.log(`checkPoker? ${checkPoker(hand1)}`);
-    console.log(`checkFull? ${checkFull(hand1)}`);
-    console.log(`checkFlush? ${checkFlush(hand1)}`);
-    console.log(`checkStraight? ${checkStraight(hand1)}`);
-    console.log(`checkThreeOfAKind? ${checkThreeOfAKind(hand1)}`);
-    console.log(`checkDoublePair? ${checkDoublePair(hand1)}`);
-    console.log(`checkPair? ${checkPair(hand1)}`);
-    console.log(`getHigherCardValue = ${getHigherCardValue(hand1)}`);
+function init(hand1String, hand2String) {
+    handInitiator(hand1String, hand1);
+    handInitiator(hand2String, hand2);
 }
 
 
-
-function init() {
-    let cardSet1 = new Set([
-        new Card( '2', 'H' ),
-        new Card( '2', 'S' ),
-        new Card( '2', 'D' ),
-        new Card( '2', 'C' ),
-        new Card( '1', 'H' )
-    ].sort(lowestToHighest));
-
-    hand1 = new Hand(cardSet1);
-    // hand2 = new Hand(cardSet2);
+function handInitiator(handString, handReturned) {
+    handString.split(',').forEach( element => {
+        let value = valuesDictionary.toValues[element[0]];
+        let suit = element[1];
+        handReturned.push( new Card(value, suit) );
+    });
+    handReturned = handReturned.sort(lowestToHighest);
 }
 
+function checkHandRules( hand ) {
+    console.log(`checkStraightFlush? ${checkStraightFlush(hand)}`);
+    console.log(`checkPoker? ${checkPoker(hand)}`);
+    console.log(`checkFull? ${checkFull(hand)}`);
+    console.log(`checkFlush? ${checkFlush(hand)}`);
+    console.log(`checkStraight? ${checkStraight(hand)}`);
+    console.log(`checkThreeOfAKind? ${checkThreeOfAKind(hand)}`);
+    console.log(`checkDoublePair? ${checkDoublePair(hand)}`);
+    console.log(`checkPair? ${checkPair(hand)}`);
+    console.log(`getHigherCardValue = ${getHigherCardValue(hand)}`);
+}
 
 function checkStraightFlush( hand ) {
     let isStraightFlush = checkStraight(hand) && checkFlush(hand);
@@ -146,4 +140,9 @@ function isRepeatedInANumber( hand, repeatedAmount ) {
         }
     });
     return isRepeated;
+}
+
+
+export {
+    playGame as PlayGame
 }
