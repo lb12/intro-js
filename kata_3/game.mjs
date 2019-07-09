@@ -38,11 +38,11 @@ function playGame() {
 
 function init() {
     let cardSet1 = new Set([
-        new Card( '1', 'H' ),
-        new Card( '1', 'S' ),
-        new Card( '1', 'D' ),
-        new Card( '1', 'C' ),
-        new Card( '2', 'H' )
+        new Card( '2', 'H' ),
+        new Card( '2', 'S' ),
+        new Card( '2', 'D' ),
+        new Card( '2', 'C' ),
+        new Card( '1', 'H' )
     ].sort(lowestToHighest));
 
     hand1 = new Hand(cardSet1);
@@ -80,31 +80,10 @@ function checkFlush( hand ) {
 }
 
 function checkPoker( hand ) {
-    let baseCard = hand[0].value; // First card value of the hand
-    let counter = 0;
-    let changeCardValue = 0;
-    let isPoker = true;
+    let pokerRegularExpression = /[a-z0-9]?([a-z0-9])\1{3}[a-z0-9]?/;
+    let cardsValue = hand.map(card => card.value).join('');
 
-    let subArray = hand.slice(1);
-
-    for(let i = 0; i <= subArray.length; i++) {
-        let currentCard = subArray[i];
-        
-        if( counter === 3 && i >= 2 ) {
-            break; // poker = true (exit condition)
-        } else if ( currentCard === undefined || (counter <= 2 && i > 2 && changeCardValue > 1) ) { // Last check failed or impossible to reach a poker
-            isPoker = false; // poker = false (exit condition)
-            break;
-        } else if ( baseCard.value === currentCard.value ) {
-            counter++;
-        } else { // Different values: update card values and make a card change, reset counter
-            baseCard = currentCard;
-            changeCardValue++;
-            counter = 0;
-        }
-    }
-
-    return isPoker;
+    return pokerRegularExpression.test( cardsValue );
 }
 
 function checkFull( hand ) {
