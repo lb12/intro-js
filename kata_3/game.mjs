@@ -7,13 +7,20 @@ import { lowestToHighest, valuesDictionary,  } from "./utils";
 let hand1 = []; 
 let hand2 = [];
 
+let error = new Error();
 
 function playGame(hand1String, hand2String) { // hand1String='1H,1C,1D,1S,4H' ; hand2String='6C,9D,7H,3S,9H'
     init(hand1String, hand2String);
 
+    // If there is an error with hand initiation, exit
+    if(error.message !== "")
+        return;
+
     console.log('\nPlayer 1 Hand checker...\n');
+    printHand(hand1);
     checkHandRules(hand1);
     console.log('\nPlayer 2 Hand checker...\n');
+    printHand(hand2);
     checkHandRules(hand2);
 }
 
@@ -22,14 +29,39 @@ function init(hand1String, hand2String) {
     handInitiator(hand2String, hand2);
 }
 
-
 function handInitiator(handString, handReturned) {
+    try {
+        isGoodHand(handString);
+    } catch(ex) {
+        console.log(error);
+        return;
+    }
+
     handString.split(',').forEach( element => {
         let value = valuesDictionary.toValues[element[0]];
         let suit = element[1];
         handReturned.push( new Card(value, suit) );
     });
     handReturned = handReturned.sort(lowestToHighest);
+}
+
+function isGoodHand( handString ) {
+    // Check if there are repeated cards
+    let normalizedHand = handString.split(',').filter( (item, index, array) => {
+        return array.indexOf(item) === index;
+    });
+
+    if( normalizedHand.length != 5 ) {
+        error.message = 'There should only be 5 different cards.';
+        throw error;
+    }
+}
+
+function printHand( hand ) {
+    hand.forEach( card => {
+        console.log(card.toString());
+    });
+    console.log('\n');
 }
 
 function checkHandRules( hand ) {
@@ -74,10 +106,10 @@ function checkFlush( hand ) {
 }
 
 function checkPoker( hand ) {
-    let pokerRegularExpression = /[a-z0-9]?([a-z0-9])\1{3}[a-z0-9]?/;
-    let cardsValue = hand.map(card => card.value).join('');
+    let pokerRegularExpression = /([0-9]{1,2})\1{3}/;
+    let cardsValue = hand.map(card => parseInt(card.value)).join('');    
 
-    return pokerRegularExpression.test( cardsValue );
+    return pokerRegularExpression.test( parseInt(cardsValue) );
 }
 
 function checkFull( hand ) {

@@ -1,6 +1,6 @@
 'use strict';
 
-import { suits } from './utils';
+import { suits, valuesDictionary } from './utils';
 
 class Card {
     constructor(value, suit) {
@@ -9,7 +9,8 @@ class Card {
     }
 
     toString() {
-        console.log( `${this.constructor.name} : { ${this.value} of ${suits[this.suit]} (${this.value}${this.suit}) }  `);
+        return `${ this.constructor.name } : { ${ valuesDictionary.toCard[this.value] } of ` +
+        `${ suits[this.suit] } (${ valuesDictionary.toCard[this.value] }${ this.suit }) }  `;
     }
 }
 
