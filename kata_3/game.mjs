@@ -17,13 +17,16 @@ function playGame(hand1String, hand2String) { // hand1String='1H,1C,1D,1S,4H' ; 
     if(error.message !== "")
         return;
 
+    console.log('\n------------------------------\n');
     console.log('--> Player 1 Hand...\n');
     hand1.printHand();
-    hand1.possiblePlays();
+    hand1.printPlays();
     console.log('\n------------------------------\n');
     console.log('--> Player 2 Hand...\n');
     hand2.printHand();
-    hand2.possiblePlays();
+    hand2.printPlays();
+    console.log('\n------------------------------\n');
+    compareHands();
 }
 
 function init(hand1String, hand2String) {
@@ -59,6 +62,15 @@ function isGoodHand( handString ) {
         error.message = 'There should only be 5 different cards.';
         throw error;
     }
+}
+
+function compareHands() {
+    if(hand1.bestPlay > hand2.bestPlay)
+        console.log('Player 1 wins, ' + hand1.getPrettyBestPlay());
+    else if (hand1.bestPlay < hand2.bestPlay)
+        console.log('Player 2 wins, ' + hand2.getPrettyBestPlay());
+    else
+        console.log('Tie');
 }
 
 export {

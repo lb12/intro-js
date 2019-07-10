@@ -40,6 +40,18 @@ let valuesDictionary = {
   }
 };
 
+let plays = {
+  0 : 'Higher card',
+  1 : 'Pair',
+  2 : 'Double Pair',
+  3 : 'Three of a Kind',
+  4 : 'Straight',
+  5 : 'Flush',
+  6 : 'Full',
+  7 : 'Poker',
+  8 : 'Straight Flush'
+};
+
 
 
 function lowestToHighest(a, b) {
@@ -50,5 +62,5 @@ function lowestToHighest(a, b) {
 }
 
 export {
-  suits, valuesDictionary, lowestToHighest
+  suits, valuesDictionary, lowestToHighest, plays
 }
