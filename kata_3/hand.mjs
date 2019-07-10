@@ -89,14 +89,16 @@ class Hand {
 
     // Aux methods
     
-    getUnrepeatedCards( repeatedAmount ) {
+    getUnrepeatedCards( repeatedAmount, hand ) {
         let otherCards = null;
-        for(let i = 0; i < this.cards.length; i++) {
-            let currentCard = this.cards[i];
-            let repeatedCards = this.cards.filter( card => card.value === currentCard.value );
+        hand = hand || this.cards;
+
+        for(let i = 0; i < hand.length; i++) {
+            let currentCard = hand[i];
+            let repeatedCards = hand.filter( card => card.value === currentCard.value );
             if( repeatedCards.length >= repeatedAmount ) {
 
-                otherCards = this.cards.slice(); 
+                otherCards = hand.slice(); 
                 otherCards.splice(i, repeatedAmount);
                 break;
             }
@@ -117,12 +119,22 @@ class Hand {
         hand = hand || this.cards;
         let cardValue = -1;
 
-        hand.forEach( currentCard => {
+        for(let i = 0; i < hand.length; i++) {
+            let currentCard = hand[i];
             let possibleRepeated = hand.filter( card => card.value === currentCard.value );
+
             if( possibleRepeated.length >= repeatedAmount ) {
                 cardValue = possibleRepeated[0].value;
+                break;
             }
-        });
+        }
+
+        // hand.forEach( currentCard => {
+        //     let possibleRepeated = hand.filter( card => card.value === currentCard.value );
+        //     if( possibleRepeated.length >= repeatedAmount ) {
+        //         cardValue = possibleRepeated[0].value;
+        //     }
+        // });
 
         return cardValue;
     }

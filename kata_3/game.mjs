@@ -75,8 +75,38 @@ function compareHands() {
                 resolvePairTie();
                 break;
             case 2: // Double Pair
-                console.log('double pair');
-                
+                let h1 = hand1.cards.slice();
+                let h2 = hand2.cards.slice();
+                let hand1Value;
+                let hand2Value;
+                while(true) {
+                    if(h1.length > 1 && h2.length > 1) {
+                        hand1Value = hand1.getRepeatedCardValueInANumber(2, h1); 
+                        hand2Value = hand2.getRepeatedCardValueInANumber(2, h2);
+                    }else {
+                        hand1Value = h1[0].value;
+                        hand2Value = h2[0].value; 
+                    }
+            
+                    if (hand1Value > hand2Value){
+                        console.log('Player 1 wins, ' + hand2.getPrettyBestPlay() + ', ' + hand1Value + ' is greater than ' + hand2Value);
+                        break;
+                    }
+                    else if (hand1Value < hand2Value) {
+                        console.log('Player 2 wins, ' + hand2.getPrettyBestPlay() + ', ' + hand2Value + ' is greater than ' + hand1Value);
+                        break;
+                    }
+                    else {
+                        if(h1.length === 1) {
+                            h1 = h2 = [];
+                            console.log('Tie, players have the same cards value.');
+                            break;
+                        }
+
+                        h1 = hand1.getUnrepeatedCards( 2, h1 );
+                        h2 = hand2.getUnrepeatedCards( 2, h2 );
+                    }
+                }
                 break;
             case 3: // Three of a Kind
             case 6: // Full
