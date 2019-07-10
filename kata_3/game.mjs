@@ -17,12 +17,13 @@ function playGame(hand1String, hand2String) { // hand1String='1H,1C,1D,1S,4H' ; 
     if(error.message !== "")
         return;
 
-    console.log('\nPlayer 1 Hand checker...\n');
+    console.log('--> Player 1 Hand...\n');
     hand1.printHand();
-    checkHandRules(hand1);
-    console.log('\nPlayer 2 Hand checker...\n');
+    hand1.possiblePlays();
+    console.log('\n------------------------------\n');
+    console.log('--> Player 2 Hand...\n');
     hand2.printHand();
-    checkHandRules(hand2);
+    hand2.possiblePlays();
 }
 
 function init(hand1String, hand2String) {
@@ -58,19 +59,6 @@ function isGoodHand( handString ) {
         error.message = 'There should only be 5 different cards.';
         throw error;
     }
-}
-
-function checkHandRules( hand ) {
-
-    console.log(`checkStraightFlush? ${hand.checkStraightFlush()}`);
-    console.log(`checkPoker? ${hand.checkPoker()}`);
-    console.log(`checkFull? ${hand.checkFull()}`);
-    console.log(`checkFlush? ${hand.checkFlush()}`);
-    console.log(`checkStraight? ${hand.checkStraight()}`);
-    console.log(`checkThreeOfAKind? ${hand.checkThreeOfAKind()}`);
-    console.log(`checkDoublePair? ${hand.checkDoublePair()}`);
-    console.log(`checkPair? ${hand.checkPair()}`);
-    console.log(`getHigherCardValue = ${hand.getHigherCardValue()}`);
 }
 
 export {

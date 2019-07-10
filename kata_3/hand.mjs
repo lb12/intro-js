@@ -1,9 +1,61 @@
 'use strict';
 
+import { valuesDictionary } from './utils';
+
 class Hand {
     constructor(cards) {
         this.cards = cards;
+        this.bestPlay = 0;
     }
+
+    // Possible plays and get best play methods
+    possiblePlays() {
+        console.log('--> Possible plays...\n');
+        console.log( 'Hand with \'' + this.getPrettyHigherCard() + '\' as higher card' );
+        if( this.checkPair() ) { console.log( 'Hand with Pair' ); this.bestPlay = 1; }
+        if( this.checkDoublePair() ) { console.log( 'Hand with Double Pair' ); this.bestPlay = 2; }
+        if( this.checkThreeOfAKind() ) { console.log( 'Hand with Three of a Kind' ); this.bestPlay = 3; }
+        if( this.checkStraight() ) { console.log( 'Hand with Straight' ); this.bestPlay = 4; }
+        if( this.checkFlush() ) { console.log( 'Hand with Flush' ); this.bestPlay = 5; }
+        if( this.checkFull() ) { console.log( 'Hand with Full' ); this.bestPlay = 6; }
+        if( this.checkPoker() ) { console.log( 'Hand with Poker' ); this.bestPlay = 7; }
+        if( this.checkStraightFlush() ) { console.log( 'Hand with Straigth Flush' ); this.bestPlay = 8; }
+        this.printBestPlayPossible();
+    }
+
+    printBestPlayPossible() {
+        switch(this.bestPlay) {
+            case 8:
+                console.log('\n--> Best play possible: Straigth Flush');
+                break;
+            case 7:
+                console.log('\n--> Best play possible: Poker');
+                break;
+            case 6:
+                console.log('\n--> Best play possible: Full');
+                break;
+            case 5:
+                console.log('\n--> Best play possible: Flush');
+                break;
+            case 4:
+                console.log('\n--> Best play possible: Straight');
+                break;
+            case 3:
+                console.log('\n--> Best play possible: Three of a Kind');
+                break;
+            case 2:
+                console.log('\n--> Best play possible: Double Pair');
+                break;
+            case 1:
+                console.log('\n--> Best play possible: Pair');
+                break;
+            default:
+                console.log('\n--> Best play possible: Higher card = ' + this.getPrettyHigherCard());
+        }
+    }
+
+    
+
 
     // Checking rules 
 
@@ -74,6 +126,10 @@ class Hand {
     getHigherCardValue() {
         let cardValue = this.cards[4].value;
         return cardValue;
+    }
+
+    getPrettyHigherCard() {
+        return valuesDictionary.toCard[this.getHigherCardValue()];
     }
 
 
