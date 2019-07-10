@@ -5,12 +5,7 @@ class Hand {
         this.cards = cards;
     }
 
-    printHand() {
-        this.cards.forEach( card => {
-            console.log(card.toString());
-        });
-        console.log('\n');
-    }
+    // Checking rules 
 
     checkStraightFlush() {
         return this.checkStraight() && this.checkFlush();
@@ -110,6 +105,13 @@ class Hand {
             }
         });
         return isRepeated;
+    }
+    
+    printHand() {
+        this.cards.forEach( card => {
+            console.log(card.toString());
+        });
+        console.log('\n');
     }
 }
 
