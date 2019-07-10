@@ -69,8 +69,69 @@ function compareHands() {
         console.log('Player 1 wins, ' + hand1.getPrettyBestPlay());
     else if (hand1.bestPlay < hand2.bestPlay)
         console.log('Player 2 wins, ' + hand2.getPrettyBestPlay());
-    else
-        console.log('Tie');
+    else {
+        switch(hand1.bestPlay) { //Hand 1 and Hand 2 bestplay are equal, so it does not matter
+            case 1: // Pair
+                resolvePairTie();
+                break;
+            case 2: // Double Pair
+                console.log('double pair');
+                
+                break;
+            case 3: // Three of a Kind
+            case 6: // Full
+                resolveThreeOfAKind();
+                break;
+            default: // Higher card and sucesive
+                console.log( resolveHigherCardBetweenPlayers() );
+        }
+    }
+}
+
+function resolvePairTie() {
+    let hand1Value = hand1.getRepeatedCardValueInANumber(2);
+    let hand2Value = hand2.getRepeatedCardValueInANumber(2);
+
+    if (hand1Value > hand2Value)
+        console.log('Player 1 wins, ' + hand2.getPrettyBestPlay() + ', ' + hand1Value + ' is greater than ' + hand2Value);
+    else if (hand1Value < hand2Value)
+        console.log('Player 2 wins, ' + hand2.getPrettyBestPlay() + ', ' + hand2Value + ' is greater than ' + hand1Value);
+    else {
+        console.log( resolveHigherCardBetweenPlayers() );
+    }
+}
+
+function resolveHigherCardBetweenPlayers(){
+    let h1 = hand1.cards.slice();
+    let h2 = hand2.cards.slice();
+    let exit = false;
+    let output = "";
+
+    do {
+        if (hand1.getHigherCardValue(h1) === hand2.getHigherCardValue(h2)) {
+            if(h1.length === 1){ // Exit condition
+                output = 'Tie, players have the same cards value.';
+                exit = true; // break;
+            }
+            h1.splice(h1.length - 1);
+            h2.splice(h2.length - 1);
+        } else {
+            let playerWinner = hand1.getHigherCardValue(h1) > hand2.getHigherCardValue(h2) ? 1 : 2;
+             output = 'Player ' + playerWinner + ' wins, ' + hand1.getPrettyBestPlay() + ', Higher card'; // getPrettyBestPlay = in both players (it was a tie!)
+            exit = true; // break;
+        }
+    } while(!exit);
+
+    return output;
+}
+
+function resolveThreeOfAKind(){
+    let hand1Value = hand1.getRepeatedCardValueInANumber(3);
+    let hand2Value = hand2.getRepeatedCardValueInANumber(3);
+    if (hand1Value > hand2Value)
+        console.log('Player 1 wins, ' + hand2.getPrettyBestPlay() + ', ' + hand1Value + ' is greater than ' + hand2Value);
+    else (hand1Value < hand2Value)
+        console.log('Player 2 wins, ' + hand2.getPrettyBestPlay() + ', ' + hand2Value + ' is greater than ' + hand1Value);
 }
 
 export {

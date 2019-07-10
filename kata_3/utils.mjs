@@ -24,6 +24,7 @@ let valuesDictionary = {
     'A' : '14'
   },
   toCard: {
+    '1'  : 'A' ,
     '2'  :  2  ,
     '3'  :  3  ,
     '4'  :  4  ,

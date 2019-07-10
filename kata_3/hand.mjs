@@ -1,11 +1,12 @@
 'use strict';
 
-import { valuesDictionary, plays } from './utils';
+import { valuesDictionary, plays, lowestToHighest } from './utils';
 
 class Hand {
     constructor(cards) {
         this.cards = cards;
         this.bestPlay = 0;
+        this.fixAceValueIfNeeded();
     }
 
 
@@ -75,8 +76,9 @@ class Hand {
         return this.isRepeatedInANumber( 2, hand);
     }
     
-    getHigherCardValue() {
-        let cardValue = this.cards[4].value;
+    getHigherCardValue( hand ) {
+        hand = hand || this.cards;
+        let cardValue = hand[ hand.length - 1 ].value;
         return cardValue;
     }
 
@@ -106,13 +108,31 @@ class Hand {
         let isRepeated = false;
         hand = hand || this.cards;
 
+        isRepeated = this.getRepeatedCardValueInANumber(repeatedAmount, hand) !== -1;
+        
+        return isRepeated;
+    }
+
+    getRepeatedCardValueInANumber( repeatedAmount, hand ) {
+        hand = hand || this.cards;
+        let cardValue = -1;
+
         hand.forEach( currentCard => {
             let possibleRepeated = hand.filter( card => card.value === currentCard.value );
             if( possibleRepeated.length >= repeatedAmount ) {
-                isRepeated = true;
+                cardValue = possibleRepeated[0].value;
             }
         });
-        return isRepeated;
+
+        return cardValue;
+    }
+
+    // If hand has a straight and is the lowest straight possible (A 2 3 4 5), modify the A value from 14 to 1
+    fixAceValueIfNeeded() {
+        if( this.cards[0].value === '2' && this.cards[4].value === '14' ) {
+            this.cards[4].value = '1';
+            this.cards.sort(lowestToHighest);
+        }
     }
 
     // Possible plays and get best play methods
