@@ -128,14 +128,7 @@ class Hand {
                 break;
             }
         }
-
-        // hand.forEach( currentCard => {
-        //     let possibleRepeated = hand.filter( card => card.value === currentCard.value );
-        //     if( possibleRepeated.length >= repeatedAmount ) {
-        //         cardValue = possibleRepeated[0].value;
-        //     }
-        // });
-
+        
         return cardValue;
     }
 
