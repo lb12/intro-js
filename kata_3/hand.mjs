@@ -128,7 +128,7 @@ class Hand {
                 break;
             }
         }
-        
+
         return cardValue;
     }
 
@@ -156,8 +156,8 @@ class Hand {
         if( this.checkThreeOfAKind() ) {    console.log( 'Hand with Three of a Kind' ); this.bestPlay = 3; }
         if( this.checkStraight() ) {        console.log( 'Hand with Straight' );        this.bestPlay = 4; }
         if( this.checkFlush() ) {           console.log( 'Hand with Flush' );           this.bestPlay = 5; }
-        if( this.checkFull() ) {            console.log( 'Hand with Full' );            this.bestPlay = 6; }
-        if( this.checkPoker() ) {           console.log( 'Hand with Poker' );           this.bestPlay = 7; }
+        if( this.checkFull() ) {            console.log( 'Hand with Full House' );      this.bestPlay = 6; }
+        if( this.checkPoker() ) {           console.log( 'Hand with Four of Kind' );    this.bestPlay = 7; }
         if( this.checkStraightFlush() ) {   console.log( 'Hand with Straigth Flush' );  this.bestPlay = 8; }
     }
 

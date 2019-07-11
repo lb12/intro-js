@@ -42,7 +42,7 @@ let possibleHands = {
     }
 };
 
-// Main
+// Main ( Examples, change the cards value to test the game or change hand with possibleHands variable if you want )
 playPracticeExamples();
 playBadHandsWithErrors();
 

@@ -48,8 +48,8 @@ let plays = {
   3 : 'Three of a Kind',
   4 : 'Straight',
   5 : 'Flush',
-  6 : 'Full',
-  7 : 'Poker',
+  6 : 'Full House',
+  7 : 'Four of a Kind',
   8 : 'Straight Flush'
 };
 
