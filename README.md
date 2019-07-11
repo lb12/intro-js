@@ -31,7 +31,7 @@ Nos dan un número entre el 1 y 100, y tenemos que devolver por orden lo siguien
 * 75 -> FooBarQuixBar(divisible por 3, divisible por 5, contiene un 7, contiene un 5)
 
 # Segunda Kata
-## Sistema Romano
+## Sistema Romano (*kata_2*)
 Vamos a hacer un ejercicio clásico y es jugar con los números romanos y árabes.
 
 Como refresco, vamos a ver sus símbolos y reglas.
@@ -69,7 +69,7 @@ Sólo se contemplan números entre el 1 y el 3999
 
 
 # Tercera Kata
-## Póker
+## Póker (*kata_3*)
 ### Introdución
 
 Una baraja de poker contiene 52 cartas. 
