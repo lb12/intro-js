@@ -1,7 +1,7 @@
 # Práctica Introducción a Javascript - Full Stack Web Developer KeepCoding Bootcamp
 
 # Primera Kata
-## FooBarQuix
+## FooBarQuix (*kata_1*)
 
 Nos dan un número entre el 1 y 100, y tenemos que devolver por orden lo siguiente:
 
