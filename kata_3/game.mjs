@@ -30,8 +30,13 @@ function playGame(hand1String, hand2String) { // hand1String='1H,1C,1D,1S,4H' ; 
 }
 
 function init(hand1String, hand2String) {
-    hand1 = new Hand(handInitiator(hand1String));
-    hand2 = new Hand(handInitiator(hand2String));
+    let hand1Array = handInitiator(hand1String);
+    let hand2Array = handInitiator(hand2String);
+
+    if(hand1Array != null && hand2Array != null){
+        hand1 = new Hand(hand1Array);
+        hand2 = new Hand(hand1Array);
+    } 
 }
 
 function handInitiator(handString) {
@@ -39,7 +44,7 @@ function handInitiator(handString) {
         isGoodHand(handString);
     } catch(ex) {
         console.log(error);
-        return;
+        return null;
     }
 
     let cards = [];
