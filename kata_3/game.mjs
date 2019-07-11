@@ -14,8 +14,10 @@ function playGame(hand1String, hand2String) { // hand1String='1H,1C,1D,1S,4H' ; 
     init(hand1String, hand2String);
 
     // If there is an error with hand initiation, exit
-    if(error.message !== "")
+    if(error.message !== "") {
+        console.error(error.message);
         return;
+    }
 
     console.log('\n------------------------------\n');
     console.log('--> Player 1 Hand...\n');
@@ -30,43 +32,76 @@ function playGame(hand1String, hand2String) { // hand1String='1H,1C,1D,1S,4H' ; 
 }
 
 function init(hand1String, hand2String) {
+    if(!areGoodHands(hand1String, hand2String))
+        return;
+
     let hand1Array = handInitiator(hand1String);
     let hand2Array = handInitiator(hand2String);
 
     if(hand1Array != null && hand2Array != null){
         hand1 = new Hand(hand1Array);
-        hand2 = new Hand(hand1Array);
+        hand2 = new Hand(hand2Array);
     } 
 }
 
 function handInitiator(handString) {
-    try {
-        isGoodHand(handString);
-    } catch(ex) {
-        console.log(error);
-        return null;
-    }
-
     let cards = [];
-
     handString.split(',').forEach( element => {
         let value = valuesDictionary.toValues[element[0]];
         let suit = element[1];
         cards.push( new Card(value, suit) );
-    });
+    });     
     return cards.sort(lowestToHighest);
 }
 
+function areGoodHands(hand1String, hand2String) {
+    return isGoodHand(hand1String) && isGoodHand(hand2String);
+}
+
 function isGoodHand( handString ) {
-    // Check if there are repeated cards
-    let normalizedHand = handString.split(',').filter( (item, index, array) => {
+    if(!checkGoodInput(handString)) return false;
+    
+    let handSplitted = handString.split(',');
+    
+    if(!checkRepeatedCards(handSplitted)) return false;
+
+    return true;
+}
+
+function checkGoodInput(handString) {
+    let success = true;
+
+    try {
+        handString.split(',').forEach(element => {
+            success = checkGoodCardFormat(element);
+            
+            if(!success) throw error;            
+        });
+    } catch(e) {
+        success = false;
+        error = new Error(`ERROR: Input is not a string, not contains ',' or a card is not good.`);
+    }
+
+    return success;
+}
+
+function checkRepeatedCards(handSplitted) {
+    let success = true;
+    let normalizedHand = handSplitted.filter( (item, index, array) => {
         return array.indexOf(item) === index;
     });
 
     if( normalizedHand.length != 5 ) {
-        error.message = 'There should only be 5 different cards.';
-        throw error;
+        error = new Error('ERROR: There should only be 5 different cards.');
+        success = false;
     }
+
+    return success;
+}
+
+function checkGoodCardFormat(cardString) {
+    let goodCardFormat = /([2-9ATJQK])[SHCD]/;
+    return goodCardFormat.test(cardString);
 }
 
 function compareHands() {
