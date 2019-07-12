@@ -36,6 +36,7 @@ function validate( romanNumber ) {
     if ( // !isValidOrderRule(romanNumber) || // TODO: Check this (seems bad)
          !isValid1stRule(romanNumber)   || 
          !isValid2ndRule(romanNumber)   ||
+         !isValid3rdRule(romanNumber)   ||
          !isValid4thRule(romanNumber)) 
         return false;
 
@@ -81,6 +82,24 @@ function isValid1stRule(romanNumber) {
 function isValid2ndRule(romanNumber) {
     let items = ['V', 'L', 'D'];
     return checkRepeatAtMostNTimes(romanNumber, items, 1);
+}
+
+function isValid3rdRule(romanNumber) {
+    let romanSplitted = romanNumber.split('');
+    let items = ['I', 'X', 'C'];
+    let success = true;
+
+    romanSplitted.forEach( (element, index) => {
+        if(items.includes(element)) {
+            let nextElementValue = dictionary[ romanSplitted[ index + 1 ] ];
+            let currentElementValue = dictionary[element];
+
+            if( nextElementValue > (currentElementValue * 10) )
+                success = false;
+        }        
+    });
+
+    return success;
 }
 
 function isValid4thRule(romanNumber) {
