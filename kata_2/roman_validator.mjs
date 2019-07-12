@@ -1,7 +1,6 @@
 'use strict'
 import { romanToArab as dictionary, isRomanNumber } from './utils';
 
-
 let goodNumbers = [
     'XVII',
     'XIX',
@@ -33,7 +32,7 @@ badNumbers.forEach(element => {
 
 
 function validate( romanNumber ) {
-    if ( !isValidOrderRule(romanNumber) || // TODO: Check this (seems bad)
+    if ( !isValidOrderRule(romanNumber) ||
          !isValid1stRule(romanNumber)   || 
          !isValid2ndRule(romanNumber)   ||
          !isValid3rdRule(romanNumber)   ||
