@@ -33,7 +33,7 @@ badNumbers.forEach(element => {
 
 
 function validate( romanNumber ) {
-    if ( // !isValidOrderRule(romanNumber) || // TODO: Check this (seems bad)
+    if ( !isValidOrderRule(romanNumber) || // TODO: Check this (seems bad)
          !isValid1stRule(romanNumber)   || 
          !isValid2ndRule(romanNumber)   ||
          !isValid3rdRule(romanNumber)   ||
@@ -47,28 +47,27 @@ function validate( romanNumber ) {
 
 function isValidOrderRule(romanNumber) {
     let romanSplitted = romanNumber.split('');
+    let items = ['I', 'X', 'C'];
 
     let success = true;
 
-    if(romanSplitted.length >= 3) {
-        if (romanNumber.toString().includes('I') ||
-            romanNumber.toString().includes('X') ||
-            romanNumber.toString().includes('C') ) {
-            romanSplitted.forEach( (element, index) => {
+    if(romanSplitted.length > 2) {
+        for(let index = 0; index < romanSplitted.length; index++) {
+            let element = romanSplitted[index];
+            if(items.includes(element)) {
                 switch(element) {
                     case 'I':
-                        success = checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['X', 'L', 'C']); // IVI or IXI
+                        success = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['I', 'V', 'X']); // IVI or IXI
                         break;
-                    case 'X':                         
-                        success = checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['X', 'L', 'C']); // XLX or XCX
+                    case 'X':    
+                        success = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['X', 'L', 'C']); // XLX or XCX
                         break;
                     case 'C':
-                        success = checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['C', 'D', 'M']); // CDC or CMC
-                        break;
-                    default:
+                        success = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['C', 'D', 'M']); // CDC or CMC
                         break;
                 }
-            });
+            }
+            if(!success) break;     
         }
     }
     return success;
@@ -111,7 +110,7 @@ function isValid4thRule(romanNumber) {
 
 // Aux checking methods
 function checkSpecialCase (romanSplitted, items) {
-    return !(romanSplitted[0] === items[1] || romanSplitted[0] === items[2]) && romanSplitted[1] === items[0];
+    return (romanSplitted[0] === items[1] || romanSplitted[0] === items[2]) && romanSplitted[1] === items[0];
 }
 
 function checkRepeatAtMostNTimes( romanNumber, items, limit ){
