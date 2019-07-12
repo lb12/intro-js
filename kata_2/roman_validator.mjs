@@ -1,41 +1,13 @@
 'use strict'
-import { romanToArab as dictionary, isRomanNumber } from './utils';
-
-let goodNumbers = [
-    'XVII',
-    'XIX',
-    'XIV',
-    'XLIX',
-    'MCD',
-    'MMMCMXCIX'
-];
-
-let badNumbers = [
-    'VV',
-    'XXXX',
-    'VX',
-    'DDX',
-    'DMX',
-    'IVI',
-    'CMC',
-    'XIICDC',
-    'IC'
-];
-
-goodNumbers.forEach(element => {
-    console.log(element + ' ? ' + validate(element));
-});
-
-badNumbers.forEach(element => {
-    console.log(element + ' ? ' + validate(element));
-});
+import { romanToArab as dictionary } from './utils';
 
 
 function validate( romanNumber ) {
-    if ( !isValidOrderRule(romanNumber) ||
-         !isValid1stRule(romanNumber)   || 
-         !isValid2ndRule(romanNumber)   ||
-         !isValid3rdRule(romanNumber)   ||
+    if ( !useRomanNumbersOnly(romanNumber) ||
+         !isValidOrderRule(romanNumber)    ||
+         !isValid1stRule(romanNumber)      || 
+         !isValid2ndRule(romanNumber)      ||
+         !isValid3rdRule(romanNumber)      ||
          !isValid4thRule(romanNumber)) 
         return false;
 
@@ -43,6 +15,11 @@ function validate( romanNumber ) {
 }
 
 // Rules checking
+
+function useRomanNumbersOnly( romanNumber ) {
+    let romanNumberToken = /[IiVvXxLlCcDdMm]+/;
+    return romanNumberToken.test(romanNumber);
+}
 
 function isValidOrderRule(romanNumber) {
     let romanSplitted = romanNumber.split('');
@@ -154,4 +131,4 @@ function checkIfRightElementIsHigher(romanNumber, items) {
 }
 
 
-export { validate };
+export { validate as isRomanValidator };

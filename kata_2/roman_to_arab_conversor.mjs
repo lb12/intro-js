@@ -1,14 +1,17 @@
 'use strict';
 
-import { romanToArab as dictionary, isRomanNumber } from './utils';
+import { romanToArab as dictionary } from './utils';
+import { isRomanValidator as isRomanNumber } from './roman_validator';
 
 let input = [];
 let output = 0;
 
 
 function convert(romanNumber) {
-    // TODO: Check good roman number with function
-    // Function call goes here
+    if (!isRomanNumber( romanNumber )) {
+        console.error( `'${romanNumber}' is not a valid roman number.` );
+        return ;
+    }
 
     //Here we know the input is ok to be converted
     
@@ -20,7 +23,7 @@ function convert(romanNumber) {
 
 
 function init( romanNumber ) {
-    input = romanNumber.split('');
+    input = romanNumber.toUpperCase().split('');
     output = 0;
 }
 
@@ -50,7 +53,7 @@ function addResults(auxOutput) {
 
 
 function printResult(romanNumber) {
-    console.log(romanNumber + " = " + output);
+    console.log(romanNumber.toUpperCase() + " = " + output);
 }
 
 

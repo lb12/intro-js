@@ -10,6 +10,9 @@ romanToArab('XIV');
 romanToArab('XLIX');
 romanToArab('MCD');
 romanToArab('MMMCMXCIX');
+romanToArab('IVI');
+romanToArab('xxx');
+romanToArab('xl');
 
 console.log('\n * Arab to Roman *\n');
 arabToRoman(1);

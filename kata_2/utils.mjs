@@ -71,11 +71,6 @@ let arabToRoman = {
     },
 };
 
-// TODO
-function isRomanNumber( number ) {
-    return true;
-}
-
 function isArabNumber( number ) {
     return Number.isInteger(number);
 }
@@ -83,6 +78,5 @@ function isArabNumber( number ) {
 export { 
     romanToArab, 
     arabToRoman,
-    isRomanNumber,
     isArabNumber    
 };
