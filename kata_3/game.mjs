@@ -31,6 +31,7 @@ function playGame(hand1String, hand2String) { // hand1String='1H,1C,1D,1S,4H' ; 
     compareHands();
 }
 
+// Method that initialize two hands if no problem happens
 function init(hand1String, hand2String) {
     if(!areGoodHands(hand1String, hand2String))
         return;
@@ -58,6 +59,7 @@ function areGoodHands(hand1String, hand2String) {
     return isGoodHand(hand1String) && isGoodHand(hand2String);
 }
 
+// Checks good format of a hand and if there are not any repeated card. 
 function isGoodHand( handString ) {
     if(!checkGoodInput(handString)) return false;
     
@@ -104,6 +106,7 @@ function checkGoodCardFormat(cardString) {
     return goodCardFormat.test(cardString);
 }
 
+// Method that compairs the two hands, and resolve if exists a tie type.
 function compareHands() {
     if(hand1.bestPlay > hand2.bestPlay)
         console.log('Player 1 wins, ' + hand1.getPrettyBestPlay());

@@ -19,8 +19,7 @@ let possibleHands = {
     badHands : {
         repeatedCardError: 'AH,AC,AD,AS,AH',
         noStringHand: 5,
-        badCards: '5S,4X,5C,1D,9H',
-
+        badCards: '5S,4X,5C,1D,9H'
     },
     practiceHands: {
         example1 : {

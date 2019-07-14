@@ -4,8 +4,8 @@ import { suits, valuesDictionary } from './utils';
 
 class Card {
     constructor(value, suit) {
-        this.value = value;
-        this.suit = suit;
+        this.value = value; // eg -> 8
+        this.suit = suit; // eg -> H 
     }
 
     toString() {

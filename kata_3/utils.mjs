@@ -1,5 +1,6 @@
 'use strict';
 
+// Dictionary of suits
 let suits = {
   'S' : 'Spades',
   'H' : 'Hearts',
@@ -7,6 +8,7 @@ let suits = {
   'D' : 'Diamonds'
 };
 
+// Dictionary of values
 let valuesDictionary = {
   toValues: {
     2   : '2' ,
@@ -41,6 +43,7 @@ let valuesDictionary = {
   }
 };
 
+// Different possible plays
 let plays = {
   0 : 'Higher card',
   1 : 'Pair',
@@ -54,7 +57,7 @@ let plays = {
 };
 
 
-
+// Aux method to sort from the lowest to the highest value
 function lowestToHighest(a, b) {
   const valueA = parseInt(a.value);
   const valueB = parseInt(b.value);

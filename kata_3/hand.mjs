@@ -4,8 +4,8 @@ import { valuesDictionary, plays, lowestToHighest } from './utils';
 
 class Hand {
     constructor(cards) {
-        this.cards = cards;
-        this.bestPlay = 0;
+        this.cards = cards; // List of the different cards in a hand
+        this.bestPlay = 0; // Best play possible index done with this hand
         this.fixAceValueIfNeeded();
     }
 
@@ -73,7 +73,7 @@ class Hand {
     }
     
     checkPair( hand ) {
-        return this.isRepeatedInANumber( 2, hand);
+        return this.isRepeatedInANumber(2, hand);
     }
     
     getHigherCardValue( hand ) {
