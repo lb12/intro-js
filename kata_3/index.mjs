@@ -41,21 +41,33 @@ let possibleHands = {
     }
 };
 
-// Main ( Examples, change the cards value to test the game or change hand with possibleHands variable if you want )
-playPracticeExamples();
-playBadHandsWithErrors();
+
+main();
+
+
+function main() {
+    // Main ( Examples, change the cards value to test the game or change hand with possibleHands variable if you want )
+    playPracticeExamples();
+    playBadHandsWithErrors();
+}
+
 
 function playPracticeExamples() {
-    console.log('Example 1:\n');
+    console.log('\nExample 1:\n');
     PlayGame(possibleHands.practiceHands.example1.p1, possibleHands.practiceHands.example1.p2);
-    console.log('Example 2:\n');
+    console.log('\nExample 2:\n');
     PlayGame(possibleHands.practiceHands.example2.p1, possibleHands.practiceHands.example2.p2);
-    console.log('Example 3:\n');
+    console.log('\nExample 3:\n');
     PlayGame(possibleHands.practiceHands.example3.p1, possibleHands.practiceHands.example3.p2);
-    console.log('Example 4:\n');
+    console.log('\nExample 4:\n');
     PlayGame(possibleHands.practiceHands.example4.p1, possibleHands.practiceHands.example4.p2);
 }
 
 function playBadHandsWithErrors() {
+    console.log('-----------------');
+    console.log('\nExample of hands with errors:\n');
+    console.log('\nExample 1:\n');
     PlayGame(possibleHands.badHands.repeatedCardError, possibleHands.badHands.badCards);
+    console.log('\nExample 2:\n');
+    PlayGame(possibleHands.badHands.noStringHand, possibleHands.goodHands.poker);
 }
