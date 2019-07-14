@@ -1,9 +1,5 @@
 # Práctica Introducción a Javascript - Full Stack Web Developer KeepCoding Bootcamp
 
-# How to
-Cada kata está hecha en su respectiva carpeta, dentro de cada una hay un archivo 'index' que es el que 
-hay que utilizar.
-
 # Primera Kata
 ## FooBarQuix (*kata_1*)
 
@@ -139,3 +135,7 @@ Salida: Jugador 1 gana, carta más alta
 
 Entrada: Jugador 1: 2H 3D 5S 9C KD Jugador 2: 2D 3H 5C 9S KH
 Salida: Empate
+
+# How to
+Cada kata está hecha en su respectiva carpeta, dentro de cada una hay un archivo 'index' que es el que 
+hay que utilizar.
