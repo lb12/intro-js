@@ -1,5 +1,9 @@
 # Práctica Introducción a Javascript - Full Stack Web Developer KeepCoding Bootcamp
 
+# How to
+Cada kata está hecha en su respectiva carpeta, dentro de cada una hay un archivo 'index' que es el que 
+hay que utilizar.
+
 # Primera Kata
 ## FooBarQuix (*kata_1*)
 
