@@ -6,6 +6,8 @@ import { arabToRoman as dictionary, isArabNumber } from './utils';
 let input = [];
 let output;
 
+
+// Main method that converts an arab to roman number
 function convert(number) {
     if (!isArabNumber( number ) || number < 1 || number > 3999) {
         console.error( `'${number}' is not a valid arab number.` );
@@ -29,6 +31,7 @@ function splitIntoArrayOfNumbers( number ){
         .split('')
         .map( charNumber => parseInt(charNumber) );
 }
+
 
 function conversionProcess() {    
     let auxInput = input.slice(0).reverse()

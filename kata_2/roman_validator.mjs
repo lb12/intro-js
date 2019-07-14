@@ -2,6 +2,7 @@
 import { romanToArab as dictionary } from './utils';
 
 
+// Main method that validate if the @param(romanNumber) is a good roman number.
 function validate( romanNumber ) {
     if ( !useRomanNumbersOnly(romanNumber) ||
          !isValidOrderRule(romanNumber)    ||
@@ -21,11 +22,12 @@ function useRomanNumbersOnly( romanNumber ) {
     return romanNumberToken.test(romanNumber);
 }
 
+// Special method that checks if the pattern IVI-IXI, XLX-XCX, CDC-CMC is present in the roman number.
 function isValidOrderRule(romanNumber) {
     let romanSplitted = romanNumber.split('');
     let items = ['I', 'X', 'C'];
 
-    let success = true;
+    let patternIsNotPresent = true;
 
     if(romanSplitted.length > 2) {
         for(let index = 0; index < romanSplitted.length; index++) {
@@ -33,32 +35,35 @@ function isValidOrderRule(romanNumber) {
             if(items.includes(element)) {
                 switch(element) {
                     case 'I':
-                        success = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['I', 'V', 'X']); // IVI or IXI
+                        patternIsNotPresent = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['I', 'V', 'X']); // IVI or IXI
                         break;
                     case 'X':    
-                        success = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['X', 'L', 'C']); // XLX or XCX
+                        patternIsNotPresent = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['X', 'L', 'C']); // XLX or XCX
                         break;
                     case 'C':
-                        success = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['C', 'D', 'M']); // CDC or CMC
+                        patternIsNotPresent = !checkSpecialCase(romanSplitted.slice(index + 1, index + 3), ['C', 'D', 'M']); // CDC or CMC
                         break;
                 }
             }
-            if(!success) break;     
+            if(!patternIsNotPresent) break; // Pattern was found in the roman number 
         }
     }
-    return success;
+    return patternIsNotPresent;
 }
 
+// Repeat items at most 3 times
 function isValid1stRule(romanNumber) {
     let items = ['I', 'X', 'C', 'M'];
     return checkRepeatAtMostNTimes(romanNumber, items, 3);
 }
 
+// Repeat items at most 1 time
 function isValid2ndRule(romanNumber) {
     let items = ['V', 'L', 'D'];
     return checkRepeatAtMostNTimes(romanNumber, items, 1);
 }
 
+// Items can only precede their 2 successors ( I->V,X ; X->L,C ; C->D,M )
 function isValid3rdRule(romanNumber) {
     let romanSplitted = romanNumber.split('');
     let items = ['I', 'X', 'C'];
@@ -77,6 +82,7 @@ function isValid3rdRule(romanNumber) {
     return success;
 }
 
+// Items can only precede a higher roman number
 function isValid4thRule(romanNumber) {
     let items = ['V', 'L', 'D'];
     return checkIfRightElementIsHigher(romanNumber, items);

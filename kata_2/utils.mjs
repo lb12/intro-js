@@ -1,5 +1,6 @@
 'use strict';
 
+// Dictionary Roman - Arab
 let romanToArab = {
     I  : 1,
     IV : 4,
@@ -16,6 +17,7 @@ let romanToArab = {
     M  : 1000
 };
 
+// Dictionary Arab - Roman
 let arabToRoman = {
     0 : {
         roman: 'I',
@@ -71,6 +73,7 @@ let arabToRoman = {
     },
 };
 
+// Method that checks if a number is arab
 function isArabNumber( number ) {
     return Number.isInteger(number);
 }

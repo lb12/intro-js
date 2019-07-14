@@ -7,6 +7,7 @@ let input = [];
 let output = 0;
 
 
+// Main method that converts a roman to arab number
 function convert(romanNumber) {
     if (!isRomanNumber( romanNumber )) {
         console.error( `'${romanNumber}' is not a valid roman number.` );
