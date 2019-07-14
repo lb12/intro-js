@@ -79,6 +79,4 @@ function printOutput() {
     console.log(numberInput + " -> " + output);
 }
 
-module.exports = {
-    translate
-};
+export { translate as fooBarQuix };
